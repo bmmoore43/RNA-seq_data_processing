@@ -10,9 +10,9 @@
 
 ## You can apply the code 01_RNA-seq_processing.py to do the jobs automatically. An example command line for this code is as follow, which will produce a .sh file to be submitted to the slurm queue
 
-> python 01_RNA_seq_processing.py -SRA SRR14066076 -genome_seq Pvirgatum_516_v5.0.fa -gff Pvirgatum_516_v5.1.gene.gff3 -layout PE -workdir /mnt/scratch/peipeiw/Data_for_Kenia/For_RNA_seq_pipeline -trim y -adapters all_PE_adapters.fa
+> python 01_RNA_seq_processing.py -SRA SRR14066076 -genome_seq Pvirgatum_516_v5.0.fa -gff Pvirgatum_516_v5.1.gene.gff3 -layout PE -workdir /mnt/scratch/peipeiw/Data_for_Kenia/For_RNA_seq_pipeline -trim y -adapters all_PE_adapters.fa -base Pvirgatum_516_v5
 
-#### Note: one step is conducted to keep only uniquely mapped reads which had Mapping quality of HISAT2 = 60. You may want to change the script 02_keep_reads_with_quality_60_and_unique_mapping.py if that is not what you want. Description of the Hisat2 sam format: http://daehwankimlab.github.io/hisat2/manual/#sam-output
+#### Note: one step is conducted to keep only uniquely mapped reads which had Mapping quality of HISAT2 = 60. You may want to change the script 02_keep_reads_with_quality_60_and_unique_mapping.py/02_keep_reads_with_quality_60_and_unique_mapping_SE.py if that is not what you want. Description of the Hisat2 sam format: http://daehwankimlab.github.io/hisat2/manual/#sam-output
 #### Note: if you want to keep only uniquely mapped reads, please check whether the read IDs for fastq_1 and fastq_2 are the same for pairs in the paired end data. If not the same, your output would be problematic.
 
 ## combine the read count files
