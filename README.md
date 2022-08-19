@@ -1,9 +1,40 @@
 # RNA-seq_data_processing
 
-## load the packages
-> module load SRA-Toolkit FastQC Trimmomatic hisat2 SAMtools GNU/7.3.0-2.30  OpenMPI/3.1.1-CUDA HTSeq
-#### Note that if the fastq-dump doesn't work, run the code below to save the config for sra toolkit
-> vdb-config --interactive  
+## download programs
+
+**NOTE: if running on CHTC, these programs are already in the maeda_share drive**
+
+Need:
+
+FastQC
+
+https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+Trimmomatic
+
+download binary release zip: http://www.usadellab.org/cms/?page=trimmomatic
+
+HISAT2
+
+http://daehwankimlab.github.io/hisat2/download/
+
+SAMtools
+
+http://www.htslib.org/download/
+
+Python HTSeq
+
+**NOTE: Python should already be installed**
+
+on command line:
+> pip install HTSeq
+
+SRA-Toolkit (if starting from an SRA file)
+
+https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit
+  #### Note that if the fastq-dump doesn't work, run the code below to save the config for sra toolkit
+  > vdb-config --interactive  
+
 
 ## build the genome index
 > hisat2-build Pvirgatum_516_v5.0.fa Pvirgatum_516_v5.0.fa_gi
