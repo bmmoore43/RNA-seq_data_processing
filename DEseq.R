@@ -1,6 +1,11 @@
 ###################################
 # Differential expression (edgeR) #
 ###################################
+# install edgeR
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("edgeR")
 
 # load the package and data
 # Run every time to you start a new R session.
@@ -17,6 +22,7 @@ summary(counts$control_1) # Get a summary of the expression levels for the first
 # To define the treatment groups, you need to tell EdgeR what columns belong to the same treatment group (meaning they are replicates) 
 
 treatments <- c("C","C","C","Cold","Cold","Cold") # you are making a new list called "group" using c() of your treatments
+# I think this can be read in as a table
 d <- DGEList(counts, group=treatments, genes=rownames(counts)) # rownames(counts) tells DGEList that the gene names are rownames in your counts dataframe
 
 # d is now the variable that contains your DGEList
