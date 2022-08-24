@@ -14,8 +14,8 @@ args = commandArgs(TRUE)
 RC_file <- args[1] # your read counts file
 TL_file <- args[2] # transcript length file
 
-RC_file <- "Read_counts.txt"
-TL_file <- "Jascendensv1.1.gene.gff3.transcript_length.txt"
+#RC_file <- "Read_counts.txt"
+#TL_file <- "Jascendensv1.1.gene.gff3.transcript_length.txt"
 
 Exp <- read.table(RC_file,head=T,sep='\t',stringsAsFactors=F,row.names=1)
 dat <- read.table(TL_file,head=T,sep='\t',stringsAsFactors=F,row.names=1)

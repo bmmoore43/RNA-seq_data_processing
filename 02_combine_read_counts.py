@@ -9,5 +9,7 @@ for files in os.listdir('./'):
 			res = df
 			res.columns = [files.split('HTSeqCount_')[1].split('.out')[0]]
 
-res.iloc[0:-5,:].to_csv("Read_counts.txt", index=True, header=True,sep="\t")
+df1 =res.iloc[0:-5,:]
+df1 = df1.reindex(sorted(df1.columns), axis=1)
+df1.to_csv("Read_counts.txt", index=True, header=True,sep="\t")
 

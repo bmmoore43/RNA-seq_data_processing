@@ -12,10 +12,9 @@ BiocManager::install("edgeR")
 library(edgeR)
 
 # Download the expression data  
-counts <- read.table('counts_data.csv', header=T, row.names='gene', sep=',')
+counts <- read.table('counts_data.csv', header=T, row.names='gene', sep='\t')
 head(counts)
-summary(counts$control_1) # Get a summary of the expression levels for the first replicate of the control treatment
-
+#summary(counts$control_1) # Get a summary of the expression levels for the first replicate of the control treatment
 
 # You first need to tell edgeR where to look for your data (i.e. the genes, counts, and treatment groups) using DGEList
 # DGEList is a data container used by edgeR to organize this information
@@ -73,6 +72,8 @@ c_vs_cold$table$FDR <- p.adjust(c_vs_cold$table$PValue, method='BH')
 
 # Select the genes that are significantly differentially expressed (q-value <= 0.05) and have a logFC > 2 or < -2
 c_vs_cold_genes <- subset(c_vs_cold$table, c_vs_cold$table$FDR <= 0.05 & abs(c_vs_cold$table$logFC) >=2)
+write.table(data.frame("gene"=rownames(c_vs_cold_genes),c_vs_cold_genes),file="Control_vs_Cold_DEgenes.txt",quote=FALSE,sep="\t",row.names=FALSE)
+
 
 # Check out the relationship between logFC and significance by making a "volcano" plot:
 plot(-log(c_vs_cold_genes$FDR)~c_vs_cold_genes$logFC, 
@@ -80,5 +81,5 @@ plot(-log(c_vs_cold_genes$FDR)~c_vs_cold_genes$logFC,
      xlab = "logFC") 
 
 # Save your results (you do not need to turn these in, but you may want to refer to these results later)
-write.table(c_vs_cold$table,file="Control_vs_Cold.txt",quote=FALSE,sep="\t",row.names=TRUE) #quote=FALSE, to remove the "" that are automatically added on. 
+write.table(data.frame("gene"=rownames(c_vs_cold$table),c_vs_cold$table),file="Control_vs_Cold.txt",quote=FALSE,sep="\t",row.names=FALSE) #quote=FALSE, to remove the "" that are automatically added on. 
 
