@@ -1,0 +1,16 @@
+resub.9.month.old.internode.1.re_sam_sorted.sam	internode9
+X9.month.old.internode.2_sam_sorted.sam	internode9
+X9.month.old.internode.3_sam_sorted.sam	internode9
+resub.9.month.old.leaf.1.re_sam_sorted.sam	leaf9
+X9.month.old.leaf.2_sam_sorted.sam	leaf9
+X9.month.old.leaf.3_sam_sorted.sam	leaf9
+X9.month.old.root.1_R1_sam_sorted.sam	root9
+X9.month.old.root.3_R1_sam_sorted.sam	root9
+flower.1_sam_sorted.sam	flower
+flower.2_sam_sorted.sam	flower
+young.root.1_sam_sorted.sam	youngroot
+young.root.2_sam_sorted.sam	youngroot
+young.root.3_sam_sorted.sam	youngroot
+young.shoot.1_sam_sorted.sam	youngshoot
+young.shoot.2_sam_sorted.sam	youngshoot
+young.shoot.3_sam_sorted.sam	youngshoot
