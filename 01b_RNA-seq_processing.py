@@ -56,10 +56,11 @@ def main():
 	hisat_shfile.write("hisat2-2.2.1/hisat2\n") # test program is working
 	hisat_shfile.write("cp %s/$1 ./\n" % args.dir) # copy file from staging
 	hisat_shfile.write("cp %s/$2 ./\n" % args.dir)
-	hisat_shfile.write("gunzip $1") # unzip trimmed files
-	hisat_shfile.write("gunzip $2")
+	hisat_shfile.write("gunzip $1\n") # unzip trimmed files
+	hisat_shfile.write("gunzip $2\n")
 	# build the index for the genome
-	hisat_shfile.write('hisat2-build %s %s\n'%(args.genome_seq,args.base))
+	hisat_shfile.write("cp %s/%s ./\n" %(args.dir,args.genome_seq)) #cp genome from staging
+	hisat_shfile.write('hisat2-2.2.1/hisat2-build %s %s\n'%(args.genome_seq,args.base))
 	# map reads
 	if args.layout == 'PE':
 		# map the reads to the genome
