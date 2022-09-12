@@ -56,6 +56,8 @@ def main():
 	hisat_shfile.write("hisat2-2.2.1/hisat2\n") # test program is working
 	hisat_shfile.write("cp %s/$1 ./\n" % args.dir) # copy file from staging
 	hisat_shfile.write("cp %s/$2 ./\n" % args.dir)
+	hisat_shfile.write("gunzip $1") # unzip trimmed files
+	hisat_shfile.write("gunzip $2")
 	# build the index for the genome
 	hisat_shfile.write('hisat2-build %s %s\n'%(args.genome_seq,args.base))
 	# map reads
@@ -90,13 +92,15 @@ def main():
 		hisat_shfile.write("python3 -m HTSeq.scripts.count --format=sam -m union -s yes -t gene -i ID --nonunique=none -n %s $6 %s > $7\n" % (args.gff, args.threads))
 		## remove sorted sam
 		hisat_shfile.write("rm $6\n")
-	if args.layout == 'SE':
+	elif args.layout == 'SE':
 		# map the reads to the genome
-		slum_code.write('hisat2 -p 4 --dta -x %s -U $3 -S $5\n'%(args.base))
+		hisat_shfile.write('hisat2 -p 4 --dta -x %s -U $3 -S $5\n'%(args.base))
 		# sort the sam file
-		slum_code.write('samtools sort -n -O sam, $5  -o $6\n')
+		hisat_shfile.write('samtools sort -n -O sam, $5  -o $6\n')
 		# get read counts
-		slum_code.write('htseq-count --format=sam -m union -s yes -t gene -i ID --nonunique=none -n %s $6 %s > $7\n'% (args.gff, args.threads))
+		hisat_shfile.write('htseq-count --format=sam -m union -s yes -t gene -i ID --nonunique=none -n %s $6 %s > $7\n'% (args.gff, args.threads))
+	else:
+		print("must indicate PE or SE")
 	
 	hisat_shfile.close()
 	print("write hisat2-htseq.sub file")
