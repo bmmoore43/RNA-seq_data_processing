@@ -90,7 +90,7 @@ def main():
 		hisat_shfile.write("export HOME=$PWD\n")
 		# get uniquely mapped reads and read counts
 		## run script to get read counts
-		hisat_shfile.write("python3 -m HTSeq.scripts.count --format=sam -m union -s yes -t gene -i ID --nonunique=none -n %s $6 %s > $7\n" % (args.gff, args.threads))
+		hisat_shfile.write("python3 -m HTSeq.scripts.count --format=sam -m union -s yes -t gene -i ID --nonunique=none -n %s $6 %s > $7\n" % (args.threads, args.gff))
 		## remove sorted sam
 		hisat_shfile.write("rm $6\n")
 	elif args.layout == 'SE':
@@ -115,6 +115,7 @@ def main():
 	hisat_subfile.write("should_transfer_files = YES\n")
 	hisat_subfile.write("when_to_transfer_output = ON_EXIT\n")
 	hisat_subfile.write("transfer_input_files = hisat2-2.2.1-Linux_x86_64.zip,samtools-1.15.1.tar.bz2,http://proxy.chtc.wisc.edu/SQUID/chtc/python37.tar.gz,packages2.tar.gz,%s\n" % (args.gff))
+	hisat_subfile.write("+IsBuildJob = true\n")
 	hisat_subfile.write("requirements = (HasCHTCStaging == true) && (HasChtcSoftware == true) && (OpSysMajorVer =?= 7)\n")
 	hisat_subfile.write("request_cpus = %s\n" % args.threads)
 	hisat_subfile.write("request_memory = %sGB\n" % args.mem)
