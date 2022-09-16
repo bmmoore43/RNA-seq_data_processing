@@ -68,13 +68,8 @@ def main():
 		#rm trim files
 		hisat_shfile.write("rm *fastq.paired.trim*\n")
 		# unzip samtools and install
-		hisat_shfile.write("tar xjf samtools-1.15.1.tar.bz2\n")
+		hisat_shfile.write("tar -xzf samtools-1.15.1.tar.gz\n")
 		hisat_shfile.write("chmod -R 777 samtools-1.15.1/\n")
-		hisat_shfile.write("cd samtools-1.15.1/\n")
-		hisat_shfile.write("./configure --disable-lzma\n")
-		hisat_shfile.write("make\n")
-		hisat_shfile.write("make install\n")
-		hisat_shfile.write("cd ../\n")
 		# sort the sam file- htseq needs sam file sorted by name (-n)
 		hisat_shfile.write("samtools-1.15.1/samtools sort -O sam -n $5 -o $6\n")
 		# remove unsorted sam and index
@@ -114,8 +109,7 @@ def main():
 	hisat_subfile.write("arguments = $(infilepath1) $(infilepath2) $(infilepath3) $(infilepath4) $(infilepath5) $(infilepath6) $(infilepath7)\n")
 	hisat_subfile.write("should_transfer_files = YES\n")
 	hisat_subfile.write("when_to_transfer_output = ON_EXIT\n")
-	hisat_subfile.write("transfer_input_files = hisat2-2.2.1-Linux_x86_64.zip,samtools-1.15.1.tar.bz2,http://proxy.chtc.wisc.edu/SQUID/chtc/python37.tar.gz,packages2.tar.gz,%s\n" % (args.gff))
-	hisat_subfile.write("+IsBuildJob = true\n")
+	hisat_subfile.write("transfer_input_files = hisat2-2.2.1-Linux_x86_64.zip,samtools-1.15.1.tar.gz,http://proxy.chtc.wisc.edu/SQUID/chtc/python37.tar.gz,packages2.tar.gz,%s\n" % (args.gff))
 	hisat_subfile.write("requirements = (HasCHTCStaging == true) && (HasChtcSoftware == true) && (OpSysMajorVer =?= 7)\n")
 	hisat_subfile.write("request_cpus = %s\n" % args.threads)
 	hisat_subfile.write("request_memory = %sGB\n" % args.mem)
